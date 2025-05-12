@@ -1,0 +1,46 @@
+# MARK: - Xcode
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcsettings
+*.xcscheme
+*.xcodeproj/xcshareddata/xcschememanagement.plist
+*.xcworkspace/xcshareddata/xcschememanagement.plist
+
+# MARK: - Derived Data & Builds
+DerivedData/
+build/
+
+# MARK: - CocoaPods
+Pods/
+Podfile.lock
+!.gitignore
+
+# MARK: - Swift Package Manager
+.swiftpm/
+Package.resolved
+
+# MARK: - Carthage
+Carthage/Build/
+
+# MARK: - Core Data runtime files
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# MARK: - Archives
+*.xcarchive
+
+# MARK: - Misc
+.DS_Store
+*.swp
+*.lock
+*.orig
+*.preview-thumbnails
