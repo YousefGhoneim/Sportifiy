@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="exg-ah-9Rq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="exg-ah-9Rq">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Sportify" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HomeViewController" id="BYZ-38-t0r" customClass="HomeViewController" customModule="Sportify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,7 +68,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AzI-vY-ARl">
-                                <rect key="frame" x="0.0" y="88" width="207" height="298.5"/>
+                                <rect key="frame" x="0.0" y="92" width="207" height="298.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="football" translatesAutoresizingMaskIntoConstraints="NO" id="Fzz-ay-vVk">
                                         <rect key="frame" x="16" y="16" width="175" height="225"/>
@@ -94,7 +96,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uoz-gK-DuB">
-                                <rect key="frame" x="207" y="88" width="207" height="298.5"/>
+                                <rect key="frame" x="207" y="92" width="207" height="298.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="basket" translatesAutoresizingMaskIntoConstraints="NO" id="L5D-DX-6pf">
                                         <rect key="frame" x="16" y="16" width="175" height="225"/>
@@ -121,7 +123,8 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hDc-SP-x0z" secondAttribute="bottom" id="0PB-SN-xjr"/>
                             <constraint firstItem="Uoz-gK-DuB" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="1sW-uC-AYJ"/>
@@ -140,14 +143,34 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="f8n-dC-BHm" secondAttribute="bottom" id="es6-fH-94d"/>
                             <constraint firstItem="hDc-SP-x0z" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="1:2" id="uLn-db-8sl"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="sportscourt" catalog="system" id="pRJ-Ov-ogB"/>
                     <navigationItem key="navigationItem" id="laQ-sh-Dca"/>
+                    <connections>
+                        <outlet property="baseballView" destination="f8n-dC-BHm" id="AUH-5O-fKS"/>
+                        <outlet property="basketballView" destination="Uoz-gK-DuB" id="zdu-yX-bSk"/>
+                        <outlet property="footballView" destination="AzI-vY-ARl" id="Oau-4N-KgD"/>
+                        <outlet property="tennisView" destination="hDc-SP-x0z" id="4RO-6t-h2b"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1549" y="102"/>
+        </scene>
+        <!--Leagues View Controller-->
+        <scene sceneID="47l-yi-un4">
+            <objects>
+                <viewController storyboardIdentifier="LeaguesViewController" id="HEy-Ky-U0N" customClass="LeaguesViewController" customModule="Sportify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P6a-5s-wcs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="bCP-AR-QhU"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DBs-2P-nJ1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2187" y="104"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="6Aw-md-rOG">
@@ -156,6 +179,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Ldt-fO-4N8"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TaF-iu-xRU">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -174,7 +198,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="nUc-VX-Mtq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ms2-Ak-oMp">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -191,7 +215,10 @@
         <image name="baseball" width="204" height="192"/>
         <image name="basket" width="225" height="225"/>
         <image name="football" width="225" height="225"/>
-        <image name="sportscourt" catalog="system" width="64" height="40"/>
+        <image name="sportscourt" catalog="system" width="128" height="83"/>
         <image name="tennis" width="217" height="232"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
