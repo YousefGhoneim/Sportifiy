@@ -19,7 +19,7 @@ final class HomePresenter: HomePresenterProtocol {
         self.sports = [
             Sport(name: "Football", imageName: "football"),
             Sport(name: "BasketBall", imageName: "basket"),
-            Sport(name: "BaseBall", imageName: "baseball"),
+            Sport(name: "Cricket", imageName: "cricket"),
             Sport(name: "Tennis", imageName: "tennis")
         ]
     }
@@ -33,7 +33,7 @@ final class HomePresenter: HomePresenterProtocol {
         print("Selected sport: \(selected.name)")
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let leaguesVC = storyboard.instantiateViewController(withIdentifier: "LeaguesViewController") as? LeaguesViewController {
+        if let leaguesVC = storyboard.instantiateViewController(withIdentifier: "leaguesTable") as? LeaguesTableViewController {
             leaguesVC.selectedSport = selected.name
             viewController?.navigationController?.pushViewController(leaguesVC, animated: true)
         }

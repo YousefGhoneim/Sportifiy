@@ -39,7 +39,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         basketballView.addGestureRecognizer(basketballTap)
         basketballView.isUserInteractionEnabled = true
 
-        let baseballTap = UITapGestureRecognizer(target: self, action: #selector(didTapBaseball))
+        let baseballTap = UITapGestureRecognizer(target: self, action: #selector(didTapCricket))
         baseballView.addGestureRecognizer(baseballTap)
         baseballView.isUserInteractionEnabled = true
 
@@ -56,8 +56,8 @@ class HomeViewController: UIViewController, HomeViewProtocol {
         presenter.didSelectSport(named: "BasketBall")
     }
 
-    @objc private func didTapBaseball() {
-        presenter.didSelectSport(named: "BaseBall")
+    @objc private func didTapCricket() {
+        presenter.didSelectSport(named: "Cricket")
     }
 
     @objc private func didTapTennis() {
