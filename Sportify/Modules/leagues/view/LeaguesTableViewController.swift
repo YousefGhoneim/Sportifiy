@@ -75,6 +75,12 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
         tableView.deselectRow(at: indexPath, animated: true)
         let league = leagues[indexPath.row]
         print("Tapped league: \(league.league_name ?? "Unknown")")
+        
+        guard let sport = selectedSport else { return }
+
+        // Push the LeagueDetailsViewController using Swift-initialized layout
+        let leagueDetailsVC = LeagueDetailsViewController(sport: sport, leagueId: league.league_key ?? 0)
+        navigationController?.pushViewController(leagueDetailsVC, animated: true)
     }
 }
 

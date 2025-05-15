@@ -30,4 +30,33 @@ class NetworkManager {
         }
     }
 
+    static func fetchEvents(from url: String, completion: @escaping (Result<[Event], Error>) -> Void) {
+        AF.request(url).responseDecodable(of: EventsResponse.self) { response in
+            switch response.result {
+            case .success(let data):
+                if let events = data.result {
+                    completion(.success(events))
+                } else {
+                    completion(.failure(NSError(domain: "No events", code: 0)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    static func fetchTeams(from url: String, completion: @escaping (Result<[Team], Error>) -> Void) {
+        AF.request(url).responseDecodable(of: TeamsResponse.self) { response in
+            switch response.result {
+            case .success(let data):
+                if let teams = data.result {
+                    completion(.success(teams))
+                } else {
+                    completion(.failure(NSError(domain: "No teams", code: 0)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
