@@ -11,17 +11,46 @@ import CoreData
 
 
 class FavTableViewController: UITableViewController {
+
     
     var indicator : UIActivityIndicatorView!
-    var coreDataLeagues: [League] = []
+    //var coreDataLeagues: [Leagues] = [ ]
     var isConnected: Bool = true
+    
+    var coreDataLeagues: [Leagues] = {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        // Create static leagues
+        let league1 = Leagues(context: context)
+        
+        league1.name = "English Premier League"
+        league1.image = "https://example.com/premier_league.png"
+        
+        let league2 = Leagues(context: context)
+        league2.name = "NBA"
+        league2.image = "https://example.com/nba.png"
+        
+        let league3 = Leagues(context: context)
+        
+        league3.name = "NFL"
+        league3.image = "https://example.com/nfl.png"
+        
+        return [league1, league2, league3]
+    }()
+    
+    
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchFromCoreData()
-        
+        //fetchFromCoreData()
+        tableView.reloadData()
+
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
     func fetchFromCoreData() {
@@ -32,33 +61,36 @@ class FavTableViewController: UITableViewController {
         
         let fetchRequest: NSFetchRequest<Leagues> = Leagues.fetchRequest()
         
-//        do {
-//            coreDataMovies = try context.fetch(fetchRequest)
-//            movies = coreDataMovies.map { film in
-//                return [
-//                    "Title": film.title ?? "",
-//                    "Year": film.year ?? "",
-//                    "Poster": "", // You might want to store image paths in CoreData
-//                    "Rated": film.rating ?? "",
-//                    "Genre": film.genre ?? ""
-//                ]
-//            }
-//
-//            DispatchQueue.main.async {
-//                self.collectionView.reloadData()
-//                self.indicator.stopAnimating()
-//            }
-//        } catch {
-//            print("Failed to fetch from CoreData: \(error)")
-//            DispatchQueue.main.async {
-//                self.indicator.stopAnimating()
-//                self.showAlert(message: "Failed to load saved movies")
-//            }
-//        }
+        do {
+            coreDataLeagues = try context.fetch(fetchRequest)
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.indicator.stopAnimating()
+            }
+        } catch {
+            print("Failed to fetch from CoreData: \(error)")
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+                self.showAlert(message: "Failed to load saved Leagues")
+            }
+        }
         
         
         
     }
+    
+    func setUpIndicator() {
+        
+        indicator = UIActivityIndicatorView(style: .large)
+        indicator.center = view.center
+        indicator.color = .red
+        indicator.startAnimating()
+        
+        view.addSubview(indicator)
+        
+    }
+    
 
     // MARK: - Table view data source
 
@@ -69,16 +101,67 @@ class FavTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 0
+        return coreDataLeagues.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        // Configure the cell...
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
+        
+        let league = coreDataLeagues[indexPath.row]
+               cell.leagueName.text = league.name
+               
+               // Load image using Kingfisher or similar library
+        if let imageUrl = league.image, let url = URL(string: imageUrl) {
+                   cell.leagueImage.kf.setImage(with: url, placeholder: UIImage(named: "ball"))
+               } else {
+                   cell.leagueImage.image = UIImage(named: "ball")
+               }
 
         return cell
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let leagueToDelete = coreDataLeagues[indexPath.row]
+            
+            // Show confirmation alert
+            let alert = UIAlertController(
+                title: "Delete League",
+                message: "Are you sure you want to delete \(leagueToDelete.name ?? "this league")?",
+                preferredStyle: .alert
+            )
+            
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+                self?.performDeletion(at: indexPath)
+            }
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [weak self] _ in
+                self?.tableView.setEditing(false, animated: true)
+            }
+            
+            alert.addAction(deleteAction)
+            alert.addAction(cancelAction)
+            
+            present(alert, animated: true)
+        }
+    }
+    
+    private func performDeletion(at indexPath: IndexPath) {
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let leagueToDelete = coreDataLeagues[indexPath.row]
+        
+        context.delete(leagueToDelete)
+        
+        do {
+            try context.save()
+            coreDataLeagues.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        } catch {
+            showAlert(message: "Failed to delete league: \(error.localizedDescription)")
+            tableView.reloadData()
+        }
     }
     
 
@@ -127,4 +210,12 @@ class FavTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension FavTableViewController {
+    func showAlert(message: String, title: String = "Error") {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
