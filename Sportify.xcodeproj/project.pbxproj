@@ -33,6 +33,12 @@
 		E24F420B2DD2B2DF00963289 /* LeaguesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F420A2DD2B2DF00963289 /* LeaguesTableViewController.swift */; };
 		E24F420D2DD2B30F00963289 /* LeaguesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F420C2DD2B30F00963289 /* LeaguesPresenter.swift */; };
 		E24F42102DD2B42200963289 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24F420F2DD2B42200963289 /* Service.swift */; };
+		E25138142DD613DB00A9EAC0 /* FavTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25138132DD613DB00A9EAC0 /* FavTableViewController.swift */; };
+		E25138182DD6159B00A9EAC0 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25138172DD6159B00A9EAC0 /* CustomTableViewCell.swift */; };
+		E251381B2DD61E0400A9EAC0 /* Reachability in Frameworks */ = {isa = PBXBuildFile; productRef = E251381A2DD61E0400A9EAC0 /* Reachability */; };
+		E251381E2DD6222E00A9EAC0 /* Leagues.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E251381C2DD6222E00A9EAC0 /* Leagues.xcdatamodeld */; };
+		E25138212DD62B9B00A9EAC0 /* Leagues+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E251381F2DD62B9A00A9EAC0 /* Leagues+CoreDataClass.swift */; };
+		E25138222DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25138202DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +68,11 @@
 		E24F420A2DD2B2DF00963289 /* LeaguesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesTableViewController.swift; sourceTree = "<group>"; };
 		E24F420C2DD2B30F00963289 /* LeaguesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesPresenter.swift; sourceTree = "<group>"; };
 		E24F420F2DD2B42200963289 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		E25138132DD613DB00A9EAC0 /* FavTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavTableViewController.swift; sourceTree = "<group>"; };
+		E25138172DD6159B00A9EAC0 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		E251381D2DD6222E00A9EAC0 /* Leagues.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Leagues.xcdatamodel; sourceTree = "<group>"; };
+		E251381F2DD62B9A00A9EAC0 /* Leagues+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Leagues+CoreDataClass.swift"; sourceTree = "<group>"; };
+		E25138202DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Leagues+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +81,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E24F41FF2DD2AB5F00963289 /* Kingfisher in Frameworks */,
+				E251381B2DD61E0400A9EAC0 /* Reachability in Frameworks */,
 				E24F42022DD2AC0800963289 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -80,6 +92,7 @@
 		088403E82DD29F0F005823AD /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				E251380F2DD6132900A9EAC0 /* favourite */,
 				08B12CA12DD380D000ADE6B6 /* LeagueDetails */,
 				E24F2C472DD3698900AC47FF /* resources */,
 				E24F2C462DD3695000AC47FF /* app */,
@@ -201,6 +214,9 @@
 		E24F41DD2DD27FF000963289 = {
 			isa = PBXGroup;
 			children = (
+				E251381F2DD62B9A00A9EAC0 /* Leagues+CoreDataClass.swift */,
+				E25138202DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift */,
+				E251381C2DD6222E00A9EAC0 /* Leagues.xcdatamodeld */,
 				E24F41E82DD27FF100963289 /* Sportify */,
 				E24F41E72DD27FF100963289 /* Products */,
 			);
@@ -269,6 +285,39 @@
 			path = network;
 			sourceTree = "<group>";
 		};
+		E251380F2DD6132900A9EAC0 /* favourite */ = {
+			isa = PBXGroup;
+			children = (
+				E25138122DD6136F00A9EAC0 /* presenter */,
+				E25138112DD6135A00A9EAC0 /* view */,
+				E25138102DD6134900A9EAC0 /* model */,
+			);
+			path = favourite;
+			sourceTree = "<group>";
+		};
+		E25138102DD6134900A9EAC0 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		E25138112DD6135A00A9EAC0 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				E25138132DD613DB00A9EAC0 /* FavTableViewController.swift */,
+				E25138172DD6159B00A9EAC0 /* CustomTableViewCell.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		E25138122DD6136F00A9EAC0 /* presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = presenter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -288,6 +337,7 @@
 			packageProductDependencies = (
 				E24F41FE2DD2AB5F00963289 /* Kingfisher */,
 				E24F42012DD2AC0800963289 /* Alamofire */,
+				E251381A2DD61E0400A9EAC0 /* Reachability */,
 			);
 			productName = Sportify;
 			productReference = E24F41E62DD27FF100963289 /* Sportify.app */;
@@ -320,6 +370,7 @@
 			packageReferences = (
 				E24F41FD2DD2AB5F00963289 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				E24F42002DD2AC0800963289 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				E25138192DD61E0400A9EAC0 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
 			productRefGroup = E24F41E72DD27FF100963289 /* Products */;
 			projectDirPath = "";
@@ -348,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E25138222DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift in Sources */,
 				088403F42DD2A0B5005823AD /* HomePresenter.swift in Sources */,
 				088403F22DD2A081005823AD /* HomeContracts.swift in Sources */,
 				08B12CAF2DD384D200ADE6B6 /* LeagueDetailsViewController.swift in Sources */,
@@ -355,7 +407,10 @@
 				E24F420D2DD2B30F00963289 /* LeaguesPresenter.swift in Sources */,
 				088403F02DD29F9E005823AD /* HomeViewController.swift in Sources */,
 				E24F42092DD2AF4900963289 /* LeaguesResponse.swift in Sources */,
+				E25138182DD6159B00A9EAC0 /* CustomTableViewCell.swift in Sources */,
+				E25138142DD613DB00A9EAC0 /* FavTableViewController.swift in Sources */,
 				08B12CB52DD3857E00ADE6B6 /* TeamSectionView.swift in Sources */,
+				E251381E2DD6222E00A9EAC0 /* Leagues.xcdatamodeld in Sources */,
 				08B12CB12DD3852500ADE6B6 /* EventSectionView.swift in Sources */,
 				E24F42102DD2B42200963289 /* Service.swift in Sources */,
 				E24F41EA2DD27FF100963289 /* AppDelegate.swift in Sources */,
@@ -366,6 +421,7 @@
 				E24F2C432DD3626700AC47FF /* LeaguesViewProtocol.swift in Sources */,
 				E24F420B2DD2B2DF00963289 /* LeaguesTableViewController.swift in Sources */,
 				08B12CB72DD385A900ADE6B6 /* TeamCell.swift in Sources */,
+				E25138212DD62B9B00A9EAC0 /* Leagues+CoreDataClass.swift in Sources */,
 				E24F2C452DD3674C00AC47FF /* LeagueTableViewCell.swift in Sources */,
 				E24F41EC2DD27FF100963289 /* SceneDelegate.swift in Sources */,
 				08B12CA42DD3811200ADE6B6 /* Event.swift in Sources */,
@@ -583,6 +639,14 @@
 				version = 5.2.0;
 			};
 		};
+		E25138192DD61E0400A9EAC0 /* XCRemoteSwiftPackageReference "Reachability" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ashleymills/Reachability.swift";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -596,7 +660,25 @@
 			package = E24F42002DD2AC0800963289 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
+		E251381A2DD61E0400A9EAC0 /* Reachability */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E25138192DD61E0400A9EAC0 /* XCRemoteSwiftPackageReference "Reachability" */;
+			productName = Reachability;
+		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		E251381C2DD6222E00A9EAC0 /* Leagues.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E251381D2DD6222E00A9EAC0 /* Leagues.xcdatamodel */,
+			);
+			currentVersion = E251381D2DD6222E00A9EAC0 /* Leagues.xcdatamodel */;
+			path = Leagues.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E24F41DE2DD27FF000963289 /* Project object */;
 }

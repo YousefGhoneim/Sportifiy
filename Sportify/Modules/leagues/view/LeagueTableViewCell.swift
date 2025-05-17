@@ -51,7 +51,7 @@ class LeagueTableViewCell: UITableViewCell {
         if let logo = league.league_logo, let url = URL(string: logo) {
             logoImageView.kf.setImage(with: url, placeholder: UIImage(named: "ball"))
         } else {
-            logoImageView.image = UIImage(systemName: "sportscourt")
+            logoImageView.image = UIImage(named: "ball")
         }
     }
 }

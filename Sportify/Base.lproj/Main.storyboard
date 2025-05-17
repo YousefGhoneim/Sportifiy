@@ -153,7 +153,61 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1549" y="102"/>
+            <point key="canvasLocation" x="2238" y="-329"/>
+        </scene>
+        <!--Favourite-->
+        <scene sceneID="jpM-ZY-4sO">
+            <objects>
+                <tableViewController id="mwd-6g-QIR" customClass="FavTableViewController" customModule="Sportify" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="CUM-z6-YI9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="100" id="eUu-y9-V6J" customClass="CustomTableViewCell" customModule="Sportify" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="100"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eUu-y9-V6J" id="fch-99-HxZ" customClass="CustomTableViewCell" customModule="Sportify" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B6K-qe-VH3">
+                                            <rect key="frame" x="28" y="27" width="75" height="46"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="75" id="8zH-kW-ZTx"/>
+                                                <constraint firstAttribute="width" constant="75" id="Kfz-X2-ro3"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eir-no-5ce">
+                                            <rect key="frame" x="111" y="32" width="283" height="29"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="B6K-qe-VH3" secondAttribute="bottom" constant="16" id="27y-N5-u1R"/>
+                                        <constraint firstItem="B6K-qe-VH3" firstAttribute="leading" secondItem="fch-99-HxZ" secondAttribute="leadingMargin" constant="8" id="Xqa-6u-kGx"/>
+                                        <constraint firstItem="B6K-qe-VH3" firstAttribute="top" secondItem="fch-99-HxZ" secondAttribute="topMargin" constant="16" id="cyI-ef-mW9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="leagueImage" destination="B6K-qe-VH3" id="dkr-yV-r5k"/>
+                                    <outlet property="leagueName" destination="eir-no-5ce" id="Pg6-xZ-Bwz"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="mwd-6g-QIR" id="e3L-ZO-iqv"/>
+                            <outlet property="delegate" destination="mwd-6g-QIR" id="aK3-74-rNq"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="Favourite" image="heart.fill" catalog="system" id="ZRz-Xg-ebQ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x11-Yu-AZs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2237.68115942029" y="395.75892857142856"/>
         </scene>
         <!--Leagues Table View Controller-->
         <scene sceneID="Hqt-XD-1UP">
@@ -181,7 +235,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r6G-KL-IH1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2471" y="87"/>
+            <point key="canvasLocation" x="3386" y="14"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="6Aw-md-rOG">
@@ -196,6 +250,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="adf-Rw-1xR"/>
+                        <segue destination="mwd-6g-QIR" kind="relationship" relationship="viewControllers" id="IZi-EJ-nla"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lsn-jU-8ZE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -226,6 +281,7 @@
         <image name="baseball" width="204" height="192"/>
         <image name="basket" width="225" height="225"/>
         <image name="football" width="225" height="225"/>
+        <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="sportscourt" catalog="system" width="64" height="40"/>
         <image name="tennis" width="217" height="232"/>
     </resources>
