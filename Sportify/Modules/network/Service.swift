@@ -16,47 +16,79 @@ class NetworkManager {
     static func fetchLeagues(forSport sport: String, completion: @escaping (Result<[League], Error>) -> Void) {
         let url = "https://apiv2.allsportsapi.com/\(sport.lowercased())/?met=Leagues&APIkey=\(apiKey)"
 
-        AF.request(url).responseDecodable(of: LeaguesResponse.self) { response in
-            switch response.result {
-            case .success(let data):
-                if let leagues = data.result {
-                    completion(.success(leagues))
-                } else {
-                    completion(.failure(NSError(domain: "No data", code: 0)))
-                }
-            case .failure(let error):
+        AF.request(url).responseData { response in
+            guard let data = response.data, !data.isEmpty else {
+                completion(.failure(NSError(domain: "No league data", code: 0)))
+                return
+            }
+
+            do {
+                let decoded = try JSONDecoder().decode(LeaguesResponse.self, from: data)
+                completion(.success(decoded.result ?? []))
+            } catch {
+                print("Failed to decode Leagues:\n\(String(data: data, encoding: .utf8) ?? "Unreadable")")
                 completion(.failure(error))
             }
         }
     }
 
     static func fetchEvents(from url: String, completion: @escaping (Result<[Event], Error>) -> Void) {
-        AF.request(url).responseDecodable(of: EventsResponse.self) { response in
-            switch response.result {
-            case .success(let data):
-                if let events = data.result {
-                    completion(.success(events))
-                } else {
-                    completion(.failure(NSError(domain: "No events", code: 0)))
+        AF.request(url).responseData { response in
+            guard let data = response.data, !data.isEmpty else {
+                completion(.failure(NSError(domain: "No events data", code: 0)))
+                return
+            }
+
+            do {
+                let decoded = try JSONDecoder().decode(EventsResponse.self, from: data)
+                let events = decoded.result ?? []
+                if events.isEmpty {
+                    throw NSError(domain: "No events found", code: 0)
                 }
-            case .failure(let error):
+                completion(.success(events))
+            } catch {
+                print("Failed to decode Events:\n\(String(data: data, encoding: .utf8) ?? "Unreadable")")
                 completion(.failure(error))
             }
         }
     }
 
     static func fetchTeams(from url: String, completion: @escaping (Result<[Team], Error>) -> Void) {
-        AF.request(url).responseDecodable(of: TeamsResponse.self) { response in
-            switch response.result {
-            case .success(let data):
-                if let teams = data.result {
-                    completion(.success(teams))
-                } else {
-                    completion(.failure(NSError(domain: "No teams", code: 0)))
+        AF.request(url).responseData { response in
+            guard let data = response.data, !data.isEmpty else {
+                completion(.failure(NSError(domain: "No teams data", code: 0)))
+                return
+            }
+
+            do {
+                let decoded = try JSONDecoder().decode(TeamsResponse.self, from: data)
+                let teams = decoded.result ?? []
+                if teams.isEmpty {
+                    throw NSError(domain: "No teams found", code: 0)
                 }
-            case .failure(let error):
+                completion(.success(teams))
+            } catch {
+                print("Failed to decode Teams:\n\(String(data: data, encoding: .utf8) ?? "Unreadable")")
                 completion(.failure(error))
             }
         }
     }
+    
+    static func fetchPlayers(from url: String, completion: @escaping (Result<[Player], Error>) -> Void) {
+        AF.request(url).responseData { response in
+            guard let data = response.data, !data.isEmpty else {
+                completion(.failure(NSError(domain: "No player data", code: 0)))
+                return
+            }
+
+            do {
+                let decoded = try JSONDecoder().decode(PlayersResponse.self, from: data)
+                completion(.success(decoded.result ?? []))
+            } catch {
+                print("Failed to decode Players:\n\(String(data: data, encoding: .utf8) ?? "Unreadable")")
+                completion(.failure(error))
+            }
+        }
+    }
+
 }

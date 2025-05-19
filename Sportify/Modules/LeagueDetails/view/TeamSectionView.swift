@@ -9,11 +9,17 @@
 import UIKit
 import Kingfisher
 
+protocol TeamSelectionDelegate: AnyObject {
+    func didSelectTeam(_ team: Team)
+}
+
 class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     private let titleLabel = UILabel()
     private var collectionView: UICollectionView!
     private var teams: [Team] = []
+
+    weak var delegate: TeamSelectionDelegate? // ✅ delegate property
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +32,6 @@ class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     private func setupViews() {
-        // Title
         titleLabel.font = .boldSystemFont(ofSize: 20)
         titleLabel.text = "Teams"
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -38,7 +43,6 @@ class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
 
-        // Layout
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 12
@@ -68,6 +72,7 @@ class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     // MARK: - Collection View
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return teams.count
     }
@@ -81,5 +86,10 @@ class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 80, height: 100)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedTeam = teams[indexPath.item]
+        delegate?.didSelectTeam(selectedTeam) 
     }
 }

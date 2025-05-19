@@ -13,14 +13,22 @@ class LeagueDetailsPresenter: LeagueDetailsPresenterProtocol {
     private weak var view: LeagueDetailsViewProtocol?
     private let sportName: String
     private let leagueId: Int
-    
+
+    // Set of sports that don't support Teams or Fixtures properly
+    private let unsupportedSports: Set<String> = ["tennis", "cricket"]
+
     init(view: LeagueDetailsViewProtocol, sportName: String, leagueId: Int) {
         self.view = view
-        self.sportName = sportName
+        self.sportName = sportName.lowercased()
         self.leagueId = leagueId
     }
 
     func viewDidLoad() {
+        if unsupportedSports.contains(sportName) {
+            view?.showError("Events and teams are not available for this sport.")
+            return
+        }
+
         fetchUpcomingEvents()
         fetchLatestEvents()
         fetchTeams()
@@ -29,7 +37,7 @@ class LeagueDetailsPresenter: LeagueDetailsPresenterProtocol {
     private func fetchUpcomingEvents() {
         let from = today()
         let to = futureDate(days: 15)
-        let url = "https://apiv2.allsportsapi.com/\(sportName.lowercased())/?met=Fixtures&leagueId=\(leagueId)&from=\(from)&to=\(to)&APIkey=\(NetworkManager.apiKey)"
+        let url = "https://apiv2.allsportsapi.com/\(sportName)/?met=Fixtures&leagueId=\(leagueId)&from=\(from)&to=\(to)&APIkey=\(NetworkManager.apiKey)"
         
         NetworkManager.fetchEvents(from: url) { [weak self] result in
             switch result {
@@ -44,7 +52,7 @@ class LeagueDetailsPresenter: LeagueDetailsPresenterProtocol {
     private func fetchLatestEvents() {
         let from = pastDate(days: 15)
         let to = today()
-        let url = "https://apiv2.allsportsapi.com/\(sportName.lowercased())/?met=Fixtures&leagueId=\(leagueId)&from=\(from)&to=\(to)&APIkey=\(NetworkManager.apiKey)"
+        let url = "https://apiv2.allsportsapi.com/\(sportName)/?met=Fixtures&leagueId=\(leagueId)&from=\(from)&to=\(to)&APIkey=\(NetworkManager.apiKey)"
         
         NetworkManager.fetchEvents(from: url) { [weak self] result in
             switch result {
@@ -57,7 +65,7 @@ class LeagueDetailsPresenter: LeagueDetailsPresenterProtocol {
     }
 
     private func fetchTeams() {
-        let url = "https://apiv2.allsportsapi.com/\(sportName.lowercased())/?met=Teams&leagueId=\(leagueId)&APIkey=\(NetworkManager.apiKey)"
+        let url = "https://apiv2.allsportsapi.com/\(sportName)/?met=Teams&leagueId=\(leagueId)&APIkey=\(NetworkManager.apiKey)"
         
         NetworkManager.fetchTeams(from: url) { [weak self] result in
             switch result {
@@ -69,7 +77,8 @@ class LeagueDetailsPresenter: LeagueDetailsPresenterProtocol {
         }
     }
 
-    // Helper functions
+    // MARK: - Date Helpers
+
     private func today() -> String {
         return dateString(from: 0)
     }

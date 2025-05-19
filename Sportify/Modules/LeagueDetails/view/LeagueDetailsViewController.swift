@@ -1,14 +1,7 @@
-//
-//  LeagueDetailsViewController.swift
-//  Sportify
-//
-//  Created by Yousef Ghoneim on 13/05/2025.
-//  Copyright © 2025 Ahmed Ali. All rights reserved.
-//
-
 import UIKit
+import CoreData
 
-class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol {
+class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol, TeamSelectionDelegate {
 
     // MARK: - Properties
     private var upcomingEvents: [Event] = []
@@ -16,6 +9,12 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol {
     private var teams: [Team] = []
 
     private var presenter: LeagueDetailsPresenterProtocol!
+    private var isFavorite: Bool = false
+
+    private let leagueName: String
+    private let leagueLogo: String
+    private let leagueKey: Int
+    private let sportName: String
 
     // MARK: - UI Components
     private let scrollView = UIScrollView()
@@ -26,7 +25,11 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol {
     private let teamsSection = TeamSectionView()
 
     // MARK: - Init
-    init(sport: String, leagueId: Int) {
+    init(sport: String, leagueId: Int, leagueName: String, leagueLogo: String) {
+        self.sportName = sport
+        self.leagueName = leagueName
+        self.leagueLogo = leagueLogo
+        self.leagueKey = leagueId
         super.init(nibName: nil, bundle: nil)
         self.presenter = LeagueDetailsPresenter(view: self, sportName: sport, leagueId: leagueId)
     }
@@ -38,13 +41,17 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "League Details"
+        title = leagueName
         view.backgroundColor = .systemBackground
+
         setupLayout()
+        isFavorite = isLeagueInFavorites()
+        setupFavoriteButton()
+
         presenter.viewDidLoad()
     }
 
-    // MARK: - Setup
+    // MARK: - Layout
     private func setupLayout() {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scrollView)
@@ -69,9 +76,80 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol {
             contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
 
+        teamsSection.delegate = self // ✅ Set delegate
+
         contentStack.addArrangedSubview(upcomingSection)
         contentStack.addArrangedSubview(latestSection)
         contentStack.addArrangedSubview(teamsSection)
+    }
+
+    // MARK: - Favorite Button
+    private func setupFavoriteButton() {
+        let heartImage = UIImage(systemName: isFavorite ? "heart.fill" : "heart")
+        let favoriteButton = UIBarButtonItem(image: heartImage, style: .plain, target: self, action: #selector(didTapFavorite))
+        navigationItem.rightBarButtonItem = favoriteButton
+    }
+
+    @objc private func didTapFavorite() {
+        isFavorite.toggle()
+        setupFavoriteButton()
+
+        if isFavorite {
+            saveLeagueToFavorites()
+        } else {
+            removeLeagueFromFavorites()
+        }
+    }
+
+    private func saveLeagueToFavorites() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+
+        let league = Leagues(context: context)
+        league.name = leagueName
+        league.image = leagueLogo
+        league.key = Int32(leagueKey)
+
+        do {
+            try context.save()
+            print("League saved to favorites.")
+        } catch {
+            print("Failed to save league: \(error)")
+        }
+    }
+
+    private func removeLeagueFromFavorites() {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+
+        let fetch: NSFetchRequest<Leagues> = Leagues.fetchRequest()
+        fetch.predicate = NSPredicate(format: "key == %d", leagueKey)
+
+        do {
+            let results = try context.fetch(fetch)
+            for league in results {
+                context.delete(league)
+            }
+            try context.save()
+            print("League removed from favorites.")
+        } catch {
+            print("Failed to remove league: \(error)")
+        }
+    }
+
+    private func isLeagueInFavorites() -> Bool {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return false }
+        let context = appDelegate.persistentContainer.viewContext
+
+        let fetch: NSFetchRequest<Leagues> = Leagues.fetchRequest()
+        fetch.predicate = NSPredicate(format: "key == %d", leagueKey)
+
+        do {
+            let count = try context.count(for: fetch)
+            return count > 0
+        } catch {
+            return false
+        }
     }
 
     // MARK: - View Protocol Methods
@@ -94,5 +172,14 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+
+    // MARK: - TeamSelectionDelegate
+    func didSelectTeam(_ team: Team) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let vc = storyboard.instantiateViewController(withIdentifier: "TeamDetailsViewController") as? TeamDetailsViewController {
+            vc.configure(with: team, sport: sportName)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }
