@@ -8,3 +8,8 @@
 
 import Foundation
 
+protocol TeamDetailsViewProtocol: AnyObject {
+    func showTeamInfo(_ team: Team)
+    func showPlayers(_ players: [Player])
+    func showError(_ message: String)
+}
