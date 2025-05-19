@@ -17,4 +17,15 @@ struct Team: Codable {
     let team_key: Int?
     let team_name: String?
     let team_logo: String?
+
+    //  Stadium Info
+    let team_stadium: String?
+    let team_stadium_capacity: String?
+    let team_stadium_location: String?
+    let team_stadium_image: String?
+
+    //  Basic Info
+    let team_country: String?
+    let team_founded: String?
+    let team_description_en: String?
 }
