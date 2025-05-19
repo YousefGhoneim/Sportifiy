@@ -8,8 +8,6 @@
 
 import UIKit
 
-
-
 class TeamDetailsViewController: UITableViewController, TeamDetailsViewProtocol {
 
     private var presenter: TeamDetailsPresenterProtocol!
@@ -55,6 +53,8 @@ class TeamDetailsViewController: UITableViewController, TeamDetailsViewProtocol 
         }
 
         if let countryLabel = headerView.viewWithTag(4) as? UILabel {
+            
+            countryLabel.preferredMaxLayoutWidth = view.bounds.width - 32
             countryLabel.text = "🌍 \(team.team_country ?? "N/A")"
         }
 

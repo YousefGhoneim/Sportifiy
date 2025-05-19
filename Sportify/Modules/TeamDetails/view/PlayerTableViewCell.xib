@@ -16,27 +16,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVg-zD-zYe">
-                        <rect key="frame" x="67" y="12" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGe-fQ-4Gv">
-                        <rect key="frame" x="132" y="12" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3AA-vh-fmN">
-                        <rect key="frame" x="226" y="12" width="42" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Zoc-JM-P6r">
                         <rect key="frame" x="8" y="2" width="40" height="40"/>
                         <constraints>
@@ -44,11 +23,29 @@
                             <constraint firstAttribute="height" constant="40" id="i9c-n3-BlB"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XVg-zD-zYe">
+                        <rect key="frame" x="56" y="12" width="42" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGe-fQ-4Gv">
+                        <rect key="frame" x="235" y="12" width="42" height="20"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="eGe-fQ-4Gv" firstAttribute="leading" secondItem="Zoc-JM-P6r" secondAttribute="trailing" constant="187" id="JhA-6b-JhV"/>
+                    <constraint firstItem="XVg-zD-zYe" firstAttribute="leading" secondItem="Zoc-JM-P6r" secondAttribute="trailing" constant="8" id="ao6-ZB-XmH"/>
+                    <constraint firstItem="XVg-zD-zYe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="dN2-4P-xS5"/>
+                    <constraint firstItem="eGe-fQ-4Gv" firstAttribute="centerY" secondItem="Zoc-JM-P6r" secondAttribute="centerY" id="dcN-yt-QiJ"/>
                     <constraint firstItem="Zoc-JM-P6r" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="dgy-pN-c4N"/>
+                    <constraint firstItem="XVg-zD-zYe" firstAttribute="centerY" secondItem="Zoc-JM-P6r" secondAttribute="centerY" id="nyt-B9-av9"/>
                     <constraint firstItem="Zoc-JM-P6r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="sJy-hl-i4E"/>
                     <constraint firstAttribute="bottom" secondItem="Zoc-JM-P6r" secondAttribute="bottom" constant="2" id="t6m-Jw-ViV"/>
+                    <constraint firstItem="eGe-fQ-4Gv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="uJe-e8-msv"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -56,7 +53,6 @@
                 <outlet property="playerImageView" destination="Zoc-JM-P6r" id="Q7h-hA-3G5"/>
                 <outlet property="playerNameLabel" destination="XVg-zD-zYe" id="1MM-g0-ZpM"/>
                 <outlet property="playerPositionLabel" destination="eGe-fQ-4Gv" id="w8j-Oh-sll"/>
-                <outlet property="playerStatsLabel" destination="3AA-vh-fmN" id="cYo-hA-uC1"/>
             </connections>
             <point key="canvasLocation" x="312.97709923664121" y="10.563380281690142"/>
         </tableViewCell>
