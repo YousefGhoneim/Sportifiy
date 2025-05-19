@@ -74,6 +74,11 @@ class NetworkManager {
         }
     }
     
+    
+    
+    
+    // fetch Team Players
+    
     static func fetchPlayers(from url: String, completion: @escaping (Result<[Player], Error>) -> Void) {
         AF.request(url).responseData { response in
             guard let data = response.data, !data.isEmpty else {
