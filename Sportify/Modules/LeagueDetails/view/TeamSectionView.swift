@@ -68,8 +68,20 @@ class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
 
     func setTeams(_ teams: [Team]) {
         self.teams = teams
+        if teams.isEmpty {
+            // Display message
+            let messageLabel = UILabel()
+            messageLabel.text = "No Teams Available"
+            messageLabel.textAlignment = .center
+            messageLabel.textColor = .secondaryLabel
+            messageLabel.font = .italicSystemFont(ofSize: 16)
+            collectionView.backgroundView = messageLabel
+        } else {
+            collectionView.backgroundView = nil
+        }
         collectionView.reloadData()
     }
+
 
     // MARK: - Collection View
 

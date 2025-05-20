@@ -77,7 +77,6 @@ class TeamDetailsViewController: UITableViewController, TeamDetailsViewProtocol 
     }
 
     func showPlayers(_ players: [Player]) {
-        // Extract coach and separate from players
         self.coach = players.first(where: { $0.player_type?.lowercased() == "coach" })
         self.players = players.filter { $0.player_type?.lowercased() != "coach" }
 

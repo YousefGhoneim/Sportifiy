@@ -54,9 +54,20 @@ class EventSectionView: UIView {
     func setEvents(_ events: [Event]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        for event in events.prefix(10) { // show max 10
+        if events.isEmpty {
+            let label = UILabel()
+            label.text = "No Events Available"
+            label.textAlignment = .center
+            label.textColor = .secondaryLabel
+            label.font = .italicSystemFont(ofSize: 16)
+            stackView.addArrangedSubview(label)
+            return
+        }
+
+        for event in events.prefix(10) {
             let card = EventCardView(event: event)
             stackView.addArrangedSubview(card)
         }
     }
+
 }
