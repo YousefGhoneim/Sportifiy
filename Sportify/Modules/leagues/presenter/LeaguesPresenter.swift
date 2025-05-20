@@ -15,12 +15,13 @@ protocol LeaguesPresenterProtocol: AnyObject {
 
 class LeaguesPresenter: LeaguesPresenterProtocol {
     
-    
+    private var service: NetworkManagerProtocol!
     
     private weak var view: LeaguesTableViewController?
     private var sportName: String
 
-    init(view: LeaguesTableViewController, sportName: String) {
+    init(service: NetworkManagerProtocol, view: LeaguesTableViewController, sportName: String) {
+        self.service = service
         self.view = view
         self.sportName = sportName
     }
@@ -32,7 +33,7 @@ class LeaguesPresenter: LeaguesPresenterProtocol {
     }
     
     func fetchLeagues() {
-           NetworkManager.fetchLeagues(forSport: sportName) { [weak self] result in
+           service.fetchLeagues(forSport: sportName) { [weak self] result in
                switch result {
                case .success(let leagues):
                    self?.view?.showLeagues(leagues)

@@ -48,7 +48,18 @@
 		E251381E2DD6222E00A9EAC0 /* Leagues.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E251381C2DD6222E00A9EAC0 /* Leagues.xcdatamodeld */; };
 		E25138212DD62B9B00A9EAC0 /* Leagues+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E251381F2DD62B9A00A9EAC0 /* Leagues+CoreDataClass.swift */; };
 		E25138222DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25138202DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift */; };
+		E261441C2DDCB48D006EFBBF /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E261441B2DDCB48D006EFBBF /* NetworkManagerTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E261441E2DDCB48E006EFBBF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E24F41DE2DD27FF000963289 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E24F41E52DD27FF100963289;
+			remoteInfo = Sportify;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0802E4F02DD88097007C8C38 /* FavoritesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewProtocol.swift; sourceTree = "<group>"; };
@@ -75,7 +86,7 @@
 		08B559C32DDB6CE50092B250 /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
 		E24F2C422DD3626700AC47FF /* LeaguesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesViewProtocol.swift; sourceTree = "<group>"; };
 		E24F2C442DD3674C00AC47FF /* LeagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueTableViewCell.swift; sourceTree = "<group>"; };
-		E24F41E62DD27FF100963289 /* Sportify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sportify.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E24F41E62DD27FF100963289 /* Sportify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = Sportify.app; path = "/Users/ahmed/Desktop/Sportify/Sportify/build/Debug-iphoneos/Sportify.app"; sourceTree = "<absolute>"; };
 		E24F41E92DD27FF100963289 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E24F41EB2DD27FF100963289 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E24F41F02DD27FF100963289 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -91,6 +102,9 @@
 		E251381D2DD6222E00A9EAC0 /* Leagues.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Leagues.xcdatamodel; sourceTree = "<group>"; };
 		E251381F2DD62B9A00A9EAC0 /* Leagues+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Leagues+CoreDataClass.swift"; sourceTree = "<group>"; };
 		E25138202DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Leagues+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		E26144192DDCB48D006EFBBF /* SportifyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = SportifyTests.xctest; path = "/Users/ahmed/Desktop/Sportify/Sportify/build/Debug-iphoneos/SportifyTests.xctest"; sourceTree = "<absolute>"; };
+		E261441B2DDCB48D006EFBBF /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		E261441D2DDCB48D006EFBBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +115,13 @@
 				E24F41FF2DD2AB5F00963289 /* Kingfisher in Frameworks */,
 				E251381B2DD61E0400A9EAC0 /* Reachability in Frameworks */,
 				E24F42022DD2AC0800963289 /* Alamofire in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E26144162DDCB48D006EFBBF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,16 +305,8 @@
 				E25138202DD62B9B00A9EAC0 /* Leagues+CoreDataProperties.swift */,
 				E251381C2DD6222E00A9EAC0 /* Leagues.xcdatamodeld */,
 				E24F41E82DD27FF100963289 /* Sportify */,
-				E24F41E72DD27FF100963289 /* Products */,
+				E261441A2DDCB48D006EFBBF /* SportifyTests */,
 			);
-			sourceTree = "<group>";
-		};
-		E24F41E72DD27FF100963289 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E24F41E62DD27FF100963289 /* Sportify.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E24F41E82DD27FF100963289 /* Sportify */ = {
@@ -369,6 +382,15 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		E261441A2DDCB48D006EFBBF /* SportifyTests */ = {
+			isa = PBXGroup;
+			children = (
+				E261441B2DDCB48D006EFBBF /* NetworkManagerTests.swift */,
+				E261441D2DDCB48D006EFBBF /* Info.plist */,
+			);
+			path = SportifyTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -394,6 +416,24 @@
 			productReference = E24F41E62DD27FF100963289 /* Sportify.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E26144182DDCB48D006EFBBF /* SportifyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E26144222DDCB48E006EFBBF /* Build configuration list for PBXNativeTarget "SportifyTests" */;
+			buildPhases = (
+				E26144152DDCB48D006EFBBF /* Sources */,
+				E26144162DDCB48D006EFBBF /* Frameworks */,
+				E26144172DDCB48D006EFBBF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E261441F2DDCB48E006EFBBF /* PBXTargetDependency */,
+			);
+			name = SportifyTests;
+			productName = SportifyTests;
+			productReference = E26144192DDCB48D006EFBBF /* SportifyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -406,6 +446,10 @@
 				TargetAttributes = {
 					E24F41E52DD27FF100963289 = {
 						CreatedOnToolsVersion = 11.3.1;
+					};
+					E26144182DDCB48D006EFBBF = {
+						CreatedOnToolsVersion = 11.3.1;
+						TestTargetID = E24F41E52DD27FF100963289;
 					};
 				};
 			};
@@ -423,11 +467,12 @@
 				E24F42002DD2AC0800963289 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				E25138192DD61E0400A9EAC0 /* XCRemoteSwiftPackageReference "Reachability" */,
 			);
-			productRefGroup = E24F41E72DD27FF100963289 /* Products */;
+			productRefGroup = E24F41DD2DD27FF000963289;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				E24F41E52DD27FF100963289 /* Sportify */,
+				E26144182DDCB48D006EFBBF /* SportifyTests */,
 			);
 		};
 /* End PBXProject section */
@@ -442,6 +487,13 @@
 				08B559C52DDB6CE50092B250 /* PlayerTableViewCell.xib in Resources */,
 				08B559C12DDB69210092B250 /* TeamHeaderView.xib in Resources */,
 				E24F41F12DD27FF100963289 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E26144172DDCB48D006EFBBF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +540,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E26144152DDCB48D006EFBBF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E261441C2DDCB48D006EFBBF /* NetworkManagerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E261441F2DDCB48E006EFBBF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E24F41E52DD27FF100963289 /* Sportify */;
+			targetProxy = E261441E2DDCB48E006EFBBF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E24F41EF2DD27FF100963289 /* Main.storyboard */ = {
@@ -658,6 +726,44 @@
 			};
 			name = Release;
 		};
+		E26144202DDCB48E006EFBBF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SportifyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ahmdalii.SportifyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sportify.app/Sportify";
+			};
+			name = Debug;
+		};
+		E26144212DDCB48E006EFBBF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = SportifyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ahmdalii.SportifyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sportify.app/Sportify";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -675,6 +781,15 @@
 			buildConfigurations = (
 				E24F41FB2DD27FF300963289 /* Debug */,
 				E24F41FC2DD27FF300963289 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E26144222DDCB48E006EFBBF /* Build configuration list for PBXNativeTarget "SportifyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E26144202DDCB48E006EFBBF /* Debug */,
+				E26144212DDCB48E006EFBBF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
