@@ -13,11 +13,13 @@ protocol TeamDetailsPresenterProtocol: AnyObject {
 }
 
 class TeamDetailsPresenter: TeamDetailsPresenterProtocol {
+    private var service: NetworkManagerProtocol!
     private weak var view: TeamDetailsViewProtocol?
     private let team: Team
     private let sportName: String
 
-    init(view: TeamDetailsViewProtocol, team: Team, sport: String) {
+    init(service: NetworkManagerProtocol, view: TeamDetailsViewProtocol, team: Team, sport: String) {
+        self.service = service
         self.view = view
         self.team = team
         self.sportName = sport
@@ -29,9 +31,12 @@ class TeamDetailsPresenter: TeamDetailsPresenterProtocol {
     }
 
     private func fetchPlayers() {
-        let url = "https://apiv2.allsportsapi.com/\(sportName.lowercased())/?met=Players&teamId=\(team.team_key ?? 0)&APIkey=\(NetworkManager.apiKey)"
         
-        NetworkManager.fetchPlayers(from: url) { [weak self] result in
+        let apiKey = "9fa12a9cabfb50c611c248b506b791b187035a8b5d3a288ada3dbce4ba74ecb1"
+        
+        let url = "https://apiv2.allsportsapi.com/\(sportName.lowercased())/?met=Players&teamId=\(team.team_key ?? 0)&APIkey=\(apiKey)"
+        
+        service.fetchPlayers(from: url) { [weak self] result in
             switch result {
             case .success(let players):
                 self?.view?.showPlayers(players)
