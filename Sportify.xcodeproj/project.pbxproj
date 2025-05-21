@@ -29,6 +29,7 @@
 		08B3B2D22DDCC26800BC9D90 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B2D12DDCC26800BC9D90 /* NetworkServiceProtocol.swift */; };
 		08B3B2D52DDCCAA600BC9D90 /* FakeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B2D42DDCCAA600BC9D90 /* FakeNetworkService.swift */; };
 		08B3B2D72DDCCC2900BC9D90 /* FakeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B2D62DDCCC2900BC9D90 /* FakeData.swift */; };
+		08B3B3402DDE0ED600BC9D90 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3B33F2DDE0ED600BC9D90 /* SplashViewController.swift */; };
 		08B559C12DDB69210092B250 /* TeamHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B559C02DDB69210092B250 /* TeamHeaderView.xib */; };
 		08B559C42DDB6CE50092B250 /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B559C22DDB6CE50092B250 /* PlayerTableViewCell.swift */; };
 		08B559C52DDB6CE50092B250 /* PlayerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08B559C32DDB6CE50092B250 /* PlayerTableViewCell.xib */; };
@@ -89,6 +90,7 @@
 		08B3B2D12DDCC26800BC9D90 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		08B3B2D42DDCCAA600BC9D90 /* FakeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkService.swift; sourceTree = "<group>"; };
 		08B3B2D62DDCCC2900BC9D90 /* FakeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeData.swift; sourceTree = "<group>"; };
+		08B3B33F2DDE0ED600BC9D90 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		08B559C02DDB69210092B250 /* TeamHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamHeaderView.xib; sourceTree = "<group>"; };
 		08B559C22DDB6CE50092B250 /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		08B559C32DDB6CE50092B250 /* PlayerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerTableViewCell.xib; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 		088403E82DD29F0F005823AD /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				08B3B33E2DDE0EC000BC9D90 /* splash */,
 				0802E4F42DD887B5007C8C38 /* TeamDetails */,
 				E251380F2DD6132900A9EAC0 /* favourite */,
 				08B12CA12DD380D000ADE6B6 /* LeagueDetails */,
@@ -286,6 +289,14 @@
 				08B3B2D62DDCCC2900BC9D90 /* FakeData.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		08B3B33E2DDE0EC000BC9D90 /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				08B3B33F2DDE0ED600BC9D90 /* SplashViewController.swift */,
+			);
+			path = splash;
 			sourceTree = "<group>";
 		};
 		E24F2C412DD3624100AC47FF /* protocol */ = {
@@ -542,6 +553,7 @@
 				E251381E2DD6222E00A9EAC0 /* Leagues.xcdatamodeld in Sources */,
 				0802E4FA2DD88837007C8C38 /* TeamDetailsViewProtocol.swift in Sources */,
 				08B12CB12DD3852500ADE6B6 /* EventSectionView.swift in Sources */,
+				08B3B3402DDE0ED600BC9D90 /* SplashViewController.swift in Sources */,
 				08B559C42DDB6CE50092B250 /* PlayerTableViewCell.swift in Sources */,
 				E24F42102DD2B42200963289 /* Service.swift in Sources */,
 				E24F41EA2DD27FF100963289 /* AppDelegate.swift in Sources */,
