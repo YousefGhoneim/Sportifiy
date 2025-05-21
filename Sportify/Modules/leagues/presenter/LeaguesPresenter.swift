@@ -12,36 +12,26 @@ protocol LeaguesPresenterProtocol: AnyObject {
     func fetchLeagues()
 }
 
-
 class LeaguesPresenter: LeaguesPresenterProtocol {
-    
-    private var service: NetworkManagerProtocol!
-    
-    private weak var view: LeaguesTableViewController?
-    private var sportName: String
 
-    init(service: NetworkManagerProtocol, view: LeaguesTableViewController, sportName: String) {
-        self.service = service
+    private let networkService: NetworkServiceProtocol
+    private weak var view: LeaguesViewProtocol?
+    private let sportName: String
+
+    init(view: LeaguesViewProtocol, sportName: String, networkService: NetworkServiceProtocol = NetworkService()) {
         self.view = view
         self.sportName = sportName
+        self.networkService = networkService
     }
-    
-    var leaguesTableViewController: LeaguesTableViewController!
-    
-    func attatchView(tvController: LeaguesTableViewController){
-        leaguesTableViewController = tvController
-    }
-    
+
     func fetchLeagues() {
-           service.fetchLeagues(forSport: sportName) { [weak self] result in
-               switch result {
-               case .success(let leagues):
-                   self?.view?.showLeagues(leagues)
-               case .failure(let error):
-                   self?.view?.showError(error.localizedDescription)
-               }
-           }
-       }
-    
-    
+        networkService.fetchLeagues(forSport: sportName) { [weak self] result in
+            switch result {
+            case .success(let leagues):
+                self?.view?.showLeagues(leagues)
+            case .failure(let error):
+                self?.view?.showError(error.localizedDescription)
+            }
+        }
+    }
 }
