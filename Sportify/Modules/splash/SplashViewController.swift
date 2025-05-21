@@ -17,7 +17,7 @@ class SplashViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        animationView = AnimationView(name: "SportsAnimation") // no .json
+        animationView = AnimationView(name: "SportsAnimation")
         animationView?.frame = view.bounds
         animationView?.contentMode = .scaleAspectFit
         animationView?.loopMode = .playOnce
@@ -33,9 +33,15 @@ class SplashViewController: UIViewController {
     }
 
     private func showMainApp() {
-        let homeVC = HomeViewController()
+        guard let window = UIApplication.shared.windows.first else { return }
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         let nav = UINavigationController(rootViewController: homeVC)
-        nav.modalPresentationStyle = .fullScreen
-        self.present(nav, animated: true)
+
+        window.rootViewController = nav
+        window.makeKeyAndVisible()
+
+        UIView.transition(with: window, duration: 0.6, options: .transitionCrossDissolve, animations: nil)
     }
 }
