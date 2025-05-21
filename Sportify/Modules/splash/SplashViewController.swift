@@ -11,13 +11,13 @@ import Lottie
 
 class SplashViewController: UIViewController {
 
-    private var animationView: LottieAnimationView?
+    private var animationView: AnimationView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        animationView = .init(name: "your_lottie_filename")
+        animationView = AnimationView(name: "SportsAnimation") // no .json
         animationView?.frame = view.bounds
         animationView?.contentMode = .scaleAspectFit
         animationView?.loopMode = .playOnce
