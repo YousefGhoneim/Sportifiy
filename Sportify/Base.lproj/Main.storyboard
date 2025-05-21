@@ -268,7 +268,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="6Aw-md-rOG">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="yDv-Q7-AU8" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" automaticallyAdjustsScrollViewInsets="NO" id="yDv-Q7-AU8" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="Ldt-fO-4N8"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TaF-iu-xRU">
@@ -288,7 +288,7 @@
         <!--Item-->
         <scene sceneID="3t4-TH-YP5">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="exg-ah-9Rq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="exg-ah-9Rq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="nUc-VX-Mtq"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ms2-Ak-oMp">
