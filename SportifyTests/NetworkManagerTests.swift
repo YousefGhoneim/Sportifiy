@@ -38,7 +38,7 @@ final class NetworkServiceTests: XCTestCase {
            case .failure:
                XCTFail("Expected success")
            }
-           expectation.fulfill()
+           exp.fulfill()
        }
 
        waitForExpectations(timeout: 1)
@@ -57,7 +57,7 @@ final class NetworkServiceTests: XCTestCase {
            case .failure(let error):
                XCTAssertNotNil(error)
            }
-           expectation.fulfill()
+           exp.fulfill()
        }
 
        waitForExpectations(timeout: 1)
@@ -78,7 +78,7 @@ final class NetworkServiceTests: XCTestCase {
            case .failure:
                XCTFail("Expected success")
            }
-           expectation.fulfill()
+           exp.fulfill()
        }
 
        waitForExpectations(timeout: 1)
@@ -96,7 +96,7 @@ final class NetworkServiceTests: XCTestCase {
            case .failure(let error):
                XCTAssertNotNil(error)
            }
-           expectation.fulfill()
+           exp.fulfill()
        }
 
        waitForExpectations(timeout: 1)
@@ -117,7 +117,7 @@ final class NetworkServiceTests: XCTestCase {
            case .failure:
                XCTFail("Expected success")
            }
-           expectation.fulfill()
+           exp.fulfill()
        }
 
        waitForExpectations(timeout: 1)
@@ -135,7 +135,7 @@ final class NetworkServiceTests: XCTestCase {
            case .failure(let error):
                XCTAssertNotNil(error)
            }
-           expectation.fulfill()
+           exp.fulfill()
        }
 
        waitForExpectations(timeout: 1)
@@ -157,7 +157,7 @@ final class NetworkServiceTests: XCTestCase {
             case .failure:
                 XCTFail("Expected success")
             }
-            expectation.fulfill()
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 1)
@@ -175,7 +175,7 @@ final class NetworkServiceTests: XCTestCase {
             case .failure(let error):
                 XCTAssertNotNil(error)
             }
-            expectation.fulfill()
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 1)
@@ -194,7 +194,7 @@ final class NetworkServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("API call failed: \(error)")
             }
-            expectation.fulfill()
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 5)
@@ -215,7 +215,7 @@ final class NetworkServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("API call failed: \(error)")
             }
-            expectation.fulfill()
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 5)
@@ -236,7 +236,7 @@ final class NetworkServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("API call failed: \(error)")
             }
-            expectation.fulfill()
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 5)
@@ -258,7 +258,7 @@ final class NetworkServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("API call failed: \(error)")
             }
-            expectation.fulfill()
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 5)
@@ -278,7 +278,7 @@ final class NetworkServiceTests: XCTestCase {
             case .failure(let error):
                 XCTFail("Unexpected failure: \(error)")
             }
-            expectation.fulfill()
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 5)
@@ -299,7 +299,7 @@ final class NetworkServiceTests: XCTestCase {
             case .failure:
                 XCTFail("Should not fail, just return empty list")
             }
-            expectation.fulfill()
+            exp.fulfill()
         }
 
         waitForExpectations(timeout: 5)
