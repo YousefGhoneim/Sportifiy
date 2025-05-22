@@ -14,7 +14,7 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol, 
     private let leagueName: String
     private let leagueLogo: String
     private let leagueKey: Int
-    private let sportName: String
+    internal let sportName: String // ✅ needed in showPlayers()
 
     // MARK: - UI Components
     private let scrollView = UIScrollView()
@@ -76,8 +76,7 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol, 
             contentStack.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
 
-        teamsSection.delegate = self // ✅ Set delegate
-
+        teamsSection.delegate = self
         contentStack.addArrangedSubview(upcomingSection)
         contentStack.addArrangedSubview(latestSection)
         contentStack.addArrangedSubview(teamsSection)
@@ -152,7 +151,8 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol, 
         }
     }
 
-    // MARK: - View Protocol Methods
+    // MARK: - LeagueDetailsViewProtocol
+
     func showUpcomingEvents(_ events: [Event]) {
         self.upcomingEvents = events
         upcomingSection.setEvents(events)
@@ -165,7 +165,14 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol, 
 
     func showTeams(_ teams: [Team]) {
         self.teams = teams
+        teamsSection.setTitle("Teams")
         teamsSection.setTeams(teams)
+    }
+
+    func showPlayers(_ players: [Player]) {
+        let title = sportName.lowercased() == "tennis" ? "Tennis Players" : "Players"
+        teamsSection.setTitle(title)
+        teamsSection.setPlayers(players)
     }
 
     func showError(_ message: String) {

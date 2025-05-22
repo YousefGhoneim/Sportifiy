@@ -17,9 +17,12 @@ class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
 
     private let titleLabel = UILabel()
     private var collectionView: UICollectionView!
-    private var teams: [Team] = []
 
-    weak var delegate: TeamSelectionDelegate? // ✅ delegate property
+    private var teams: [Team] = []
+    private var players: [Player] = []
+    private var isShowingPlayers = false
+
+    weak var delegate: TeamSelectionDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,32 +69,67 @@ class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
         ])
     }
 
+    // MARK: - Public Methods
+
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+    }
+
     func setTeams(_ teams: [Team]) {
         self.teams = teams
+        self.players = []
+        self.isShowingPlayers = false
+
         if teams.isEmpty {
-            // Display message
-            let messageLabel = UILabel()
-            messageLabel.text = "No Teams Available"
-            messageLabel.textAlignment = .center
-            messageLabel.textColor = .secondaryLabel
-            messageLabel.font = .italicSystemFont(ofSize: 16)
-            collectionView.backgroundView = messageLabel
+            let label = UILabel()
+            label.text = "No Teams Available"
+            label.textAlignment = .center
+            label.textColor = .secondaryLabel
+            label.font = .italicSystemFont(ofSize: 16)
+            collectionView.backgroundView = label
         } else {
             collectionView.backgroundView = nil
         }
+
         collectionView.reloadData()
     }
 
+    func setPlayers(_ players: [Player]) {
+        self.players = players
+        self.teams = []
+        self.isShowingPlayers = true
 
-    // MARK: - Collection View
+        if players.isEmpty {
+            let label = UILabel()
+            label.text = "No Players Available"
+            label.textAlignment = .center
+            label.textColor = .secondaryLabel
+            label.font = .italicSystemFont(ofSize: 16)
+            collectionView.backgroundView = label
+        } else {
+            collectionView.backgroundView = nil
+        }
+
+        collectionView.reloadData()
+    }
+
+    // MARK: - UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return teams.count
+        return isShowingPlayers ? players.count : teams.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TeamCell", for: indexPath) as! TeamCell
-        cell.configure(with: teams[indexPath.item])
+
+        if isShowingPlayers {
+            let player = players[indexPath.item]
+            cell.configure(with: player)
+        } else {
+            let team = teams[indexPath.item]
+            cell.configure(with: team)
+        }
+
         return cell
     }
 
@@ -101,7 +139,12 @@ class TeamSectionView: UIView, UICollectionViewDelegate, UICollectionViewDataSou
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard !isShowingPlayers else {
+            // Optional: handle player selection if needed
+            return
+        }
+
         let selectedTeam = teams[indexPath.item]
-        delegate?.didSelectTeam(selectedTeam) 
+        delegate?.didSelectTeam(selectedTeam)
     }
 }

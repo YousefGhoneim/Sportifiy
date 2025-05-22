@@ -36,12 +36,13 @@ class SplashViewController: UIViewController {
         guard let window = UIApplication.shared.windows.first else { return }
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let homeVC = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-        let nav = UINavigationController(rootViewController: homeVC)
 
-        window.rootViewController = nav
+        // Instantiate the Navigation Controller
+        let navController = storyboard.instantiateViewController(withIdentifier: "MainNavigationController") as! UINavigationController
+
+        window.rootViewController = navController
         window.makeKeyAndVisible()
 
-        UIView.transition(with: window, duration: 0.6, options: .transitionCrossDissolve, animations: nil)
+        UIView.transition(with: window, duration: 0.4, options: .transitionCrossDissolve, animations: nil)
     }
 }

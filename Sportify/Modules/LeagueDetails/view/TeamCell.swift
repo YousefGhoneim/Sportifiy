@@ -56,12 +56,23 @@ class TeamCell: UICollectionViewCell {
         ])
     }
 
+    // MARK: - Configuration
+
     func configure(with team: Team) {
         nameLabel.text = team.team_name
         if let logo = team.team_logo, let url = URL(string: logo) {
             imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "person.circle"))
         } else {
             imageView.image = UIImage(systemName: "person.circle")
+        }
+    }
+
+    func configure(with player: Player) {
+        nameLabel.text = player.player_name
+        if let imageUrl = player.player_image, let url = URL(string: imageUrl) {
+            imageView.kf.setImage(with: url, placeholder: UIImage(systemName: "person.fill"))
+        } else {
+            imageView.image = UIImage(systemName: "person.fill")
         }
     }
 }
