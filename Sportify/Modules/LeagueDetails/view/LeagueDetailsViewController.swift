@@ -14,7 +14,7 @@ class LeagueDetailsViewController: UIViewController, LeagueDetailsViewProtocol, 
     private let leagueName: String
     private let leagueLogo: String
     private let leagueKey: Int
-    internal let sportName: String // ✅ needed in showPlayers()
+    internal let sportName: String 
 
     // MARK: - UI Components
     private let scrollView = UIScrollView()
