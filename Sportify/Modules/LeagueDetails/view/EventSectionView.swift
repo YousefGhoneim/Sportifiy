@@ -37,7 +37,6 @@ class EventSectionView: UIView {
             titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
 
-        // Stack View
         stackView.axis = .vertical
         stackView.spacing = 12
         stackView.translatesAutoresizingMaskIntoConstraints = false
