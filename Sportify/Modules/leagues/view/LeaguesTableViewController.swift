@@ -7,8 +7,13 @@
 //
 
 import UIKit
+import Reachability
 
 class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
+    
+    var reachability: Reachability?
+    var isConnected: Bool = true
+    var indicator : UIActivityIndicatorView!
     
     var selectedSport: String?
     private var presenter: LeaguesPresenterProtocol!
@@ -18,7 +23,9 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
     func showLeagues(_ leagues: [League]) {
         self.leagues = leagues
         DispatchQueue.main.async {
+            self.indicator.stopAnimating()
             self.tableView.reloadData()
+            
         }
     }
     
@@ -34,6 +41,9 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleReachability(_:)), name: ReachabilityManager.reachabilityChangedNotification, object: nil)
+        
+        
         title = selectedSport ?? "Leagues"
         tableView.register(LeagueTableViewCell.self, forCellReuseIdentifier: "LeagueCell")
         tableView.rowHeight = 80
@@ -44,9 +54,89 @@ class LeaguesTableViewController: UITableViewController, LeaguesViewProtocol {
         }
         
         presenter = LeaguesPresenter(view: self, sportName: sport)
-        presenter.fetchLeagues()
+        
+        self.setUpIndicator()
+            setupReachability()
+            if isConnected {
+                
+                presenter.fetchLeagues()
+            
+            } else {
+               showInternetSettingsAlert()
+            }
+            
+            reachability?.whenReachable = { [weak self] _ in
+                self?.isConnected = true
+                self?.presenter.fetchLeagues()
+            }
+            reachability?.whenUnreachable = { [weak self] _ in
+                self?.isConnected = false
+                self?.showInternetSettingsAlert()
+            }
+        
+        
+        
         
     }
+
+    deinit {
+        reachability?.stopNotifier()
+    }
+    
+    func showInternetSettingsAlert() {
+        let alert = UIAlertController(
+            title: "No Internet Connection",
+            message: "Please check your internet settings and try again.",
+            preferredStyle: .alert
+        )
+    
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(okAction)
+        
+        
+        present(alert, animated: true)
+    }
+
+
+    func setUpIndicator() {
+        
+        indicator = UIActivityIndicatorView(style: .large)
+        indicator.center = view.center
+        indicator.color = .red
+        indicator.startAnimating()
+        
+        view.addSubview(indicator)
+        
+    }
+    
+    func setupReachability() {
+        reachability = try? Reachability()
+        
+        reachability?.whenReachable = { [weak self] _ in
+            self?.isConnected = true
+        }
+        
+        reachability?.whenUnreachable = { [weak self] _ in
+            self?.isConnected = false
+        }
+        
+        do {
+            try reachability?.startNotifier()
+        } catch {
+            print("Unable to start reachability notifier")
+        }
+    }
+    
+//    @objc private func handleReachability(_ notification: Notification) {
+//        guard let isConnected = notification.object as? Bool else { return }
+//
+//        if !isConnected {
+//            let alert = UIAlertController(title: "No Internet", message: "You are offline.", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default))
+//            present(alert, animated: true)
+//        }
+//    }
     
     // MARK: - Table view data source
     
