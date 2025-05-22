@@ -23,8 +23,6 @@ class LeagueDetailsPresenter: LeagueDetailsPresenterProtocol {
     private let leagueId: Int
     private let networkService: NetworkServiceProtocol
 
-    private let unsupportedSports: Set<String> = ["tennis", "cricket"]
-
     init(
         view: LeagueDetailsViewProtocol,
         sportName: String,
@@ -38,14 +36,9 @@ class LeagueDetailsPresenter: LeagueDetailsPresenterProtocol {
     }
 
     func viewDidLoad() {
-        if unsupportedSports.contains(sportName) {
-            view?.showError("Events and teams are not available for this sport.")
-            return
-        }
-
         fetchUpcomingEvents()
         fetchLatestEvents()
-        fetchTeams()
+        fetchTeamsOrPlayers()
     }
 
     private func fetchUpcomingEvents() {
@@ -78,15 +71,28 @@ class LeagueDetailsPresenter: LeagueDetailsPresenterProtocol {
         }
     }
 
-    private func fetchTeams() {
-        let url = "https://apiv2.allsportsapi.com/\(sportName)/?met=Teams&leagueId=\(leagueId)&APIkey=\(networkService.apiKey)"
+    private func fetchTeamsOrPlayers() {
+        let method = sportName == "tennis" ? "Players" : "Teams"
+        let url = "https://apiv2.allsportsapi.com/\(sportName)/?met=\(method)&leagueId=\(leagueId)&APIkey=\(networkService.apiKey)"
 
-        networkService.fetchTeams(from: url) { [weak self] result in
-            switch result {
-            case .success(let teams):
-                self?.view?.showTeams(teams)
-            case .failure(let error):
-                self?.view?.showError("Teams Error: \(error.localizedDescription)")
+        if sportName == "tennis" {
+            networkService.fetchPlayers(from: url) { [weak self] result in
+                switch result {
+                case .success(let players):
+                    // wrap in a "Team-like" model or display directly
+                    self?.view?.showPlayers(players)
+                case .failure(let error):
+                    self?.view?.showError("Tennis Players Error: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            networkService.fetchTeams(from: url) { [weak self] result in
+                switch result {
+                case .success(let teams):
+                    self?.view?.showTeams(teams)
+                case .failure(let error):
+                    self?.view?.showError("Teams Error: \(error.localizedDescription)")
+                }
             }
         }
     }

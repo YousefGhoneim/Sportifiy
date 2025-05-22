@@ -43,6 +43,6 @@ class SplashViewController: UIViewController {
         window.rootViewController = navController
         window.makeKeyAndVisible()
 
-        UIView.transition(with: window, duration: 0.3, options: .transitionCrossDissolve, animations: nil)
+        UIView.transition(with: window, duration: 0.4, options: .transitionCrossDissolve, animations: nil)
     }
 }

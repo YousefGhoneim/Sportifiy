@@ -10,6 +10,7 @@ protocol LeagueDetailsViewProtocol: AnyObject {
     func showUpcomingEvents(_ events: [Event])
     func showLatestEvents(_ events: [Event])
     func showTeams(_ teams: [Team])
+    func showPlayers(_ players: [Player])
     func showError(_ message: String)
 }
 

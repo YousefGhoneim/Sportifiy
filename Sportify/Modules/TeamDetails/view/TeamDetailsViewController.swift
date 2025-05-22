@@ -15,7 +15,7 @@ class TeamDetailsViewController: UITableViewController, TeamDetailsViewProtocol 
     private var players: [Player] = []
     private var coach: Player?
 
-    // MARK: - Setup Method (called before push)
+    // MARK: - Setup Method
     func configure(with team: Team, sport: String) {
         self.team = team
         self.presenter = TeamDetailsPresenter(view: self, team: team, sport: sport)
@@ -39,32 +39,41 @@ class TeamDetailsViewController: UITableViewController, TeamDetailsViewProtocol 
             return
         }
 
-        if let logo = team.team_logo, let url = URL(string: logo),
+        if let logo = team.team_logo,
+           let url = URL(string: logo),
            let logoImageView = headerView.viewWithTag(1) as? UIImageView {
             logoImageView.kf.setImage(with: url)
         }
 
         if let nameLabel = headerView.viewWithTag(2) as? UILabel {
-            nameLabel.text = team.team_name
-        }
-
-        if let stadiumLabel = headerView.viewWithTag(3) as? UILabel {
-            stadiumLabel.text = "🏟️ \(team.team_stadium ?? "Unknown")"
-        }
-
-        if let countryLabel = headerView.viewWithTag(4) as? UILabel {
-            
-            countryLabel.preferredMaxLayoutWidth = view.bounds.width - 32
-            countryLabel.text = "🌍 \(team.team_country ?? "N/A")"
-        }
-
-        if let descLabel = headerView.viewWithTag(5) as? UILabel {
-            descLabel.text = team.team_description_en ?? ""
+            let name = team.team_name?.trimmingCharacters(in: .whitespacesAndNewlines)
+            nameLabel.text = (name?.isEmpty == false) ? name : "Team"
+            nameLabel.textColor = .label // system color for light/dark mode
+            nameLabel.backgroundColor = .clear
         }
 
         if let coachLabel = headerView.viewWithTag(6) as? UILabel {
-            coachLabel.text = "👨‍🏫 Coach: \(coach?.player_name ?? "Unavailable")"
+            if let coachName = coach?.player_name, !coachName.isEmpty {
+                coachLabel.text = "👨‍🏫 Coach: \(coachName)"
+            } else {
+                coachLabel.text = nil
+            }
+            coachLabel.textColor = .label
+            coachLabel.backgroundColor = .clear
         }
+
+        headerView.subviews.forEach { subview in
+            let isUntagged = subview.tag == 0
+            let isBlack = subview.backgroundColor == .black
+            if isUntagged && isBlack {
+                subview.removeFromSuperview()
+            }
+        }
+
+        headerView.layoutIfNeeded()
+
+        let headerSize = headerView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        headerView.frame.size.height = headerSize.height
 
         tableView.tableHeaderView = headerView
     }
@@ -80,8 +89,10 @@ class TeamDetailsViewController: UITableViewController, TeamDetailsViewProtocol 
         self.coach = players.first(where: { $0.player_type?.lowercased() == "coach" })
         self.players = players.filter { $0.player_type?.lowercased() != "coach" }
 
-        setupHeaderView()
-        tableView.reloadData()
+        DispatchQueue.main.async {
+            self.setupHeaderView()
+            self.tableView.reloadData()
+        }
     }
 
     func showError(_ message: String) {
@@ -109,4 +120,3 @@ class TeamDetailsViewController: UITableViewController, TeamDetailsViewProtocol 
         return cell
     }
 }
-
